@@ -58,3 +58,21 @@ export default async function handler(req, res) {
     res.json({ status: 500, message: error.message });
   }
 }
+
+/*
+For the sake of the hackathon middleware ARE NOT IMPLEMENTED. However the code for implementing middleware is below:
+const auth = async (req, res, next) => {
+  //JWT authorization
+}
+
+const mainAPIRoutes = async (req, res) => {
+  //Main API routes
+}
+
+
+export default handler(
+  auth,
+  mainAPIRoutes,
+);
+
+*/

@@ -3,11 +3,38 @@
 import { useAppContext } from "@/context/AppContext"
 
 export default function NavBar(){
-    const {state, setState} = useAppContext()
+    const {
+        userName,
+        theme,
+        setUsername,
+        toggleTheme
+        } = useAppContext()
+    
+    const loggedinNavBar = () => {
+        return(
+            <div>logged in
+            <button onClick={()=>setUsername("")}>logout</button>
+            </div>
+        )
+    }
+    const loggedoutNavBar = () => {
+        console.log("Logged out")
+        return(
+            <div>logged out
+                 <button onClick={()=>{setUsername("Yasss");console.log("Something cool")}}>login</button>
+            </div>
+        )
+    }
+
     return(
-        <div>{state}
-        
-        <button onClick={()=>{state=="Something" ? setState("Something else") : setState("Something")}}>Change state</button>
+        <div>{userName} {theme}
+        {userName == "" ?
+        loggedoutNavBar(): loggedinNavBar()}
+        <button onClick={toggleTheme}>toggle theme</button>
         </div>
     )
+
 }
+
+
+

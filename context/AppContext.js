@@ -4,11 +4,19 @@ import React, { createContext, useState, useContext } from 'react';
  const AppContext = createContext();
 // Create a provider component
  export const AppProvider = ({ children }) => {
- const [state, setState] = useState("Something");
+ const [userName, setUsername] = useState("Yasss");
+ const [theme, setTheme] = useState("light");
+ const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
+ 
+ 
 // Define any functions or values you want to provide
  const value = {
- state,
- setState,
+ userName,
+ theme,
+ setUsername,
+ toggleTheme
  };
 return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
  };

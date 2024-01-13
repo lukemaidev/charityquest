@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     switch (req.method) {
       case "POST":
         
-        const existedUser = await user.find({ _id : new ObjectId(slug[0]) }).toArray();
+        const existedUser = await user.find({ userName : slug[0] }).toArray();
         if (existedUser[0]) {
           res.json({ status: 400, message: "User already exists" });
           break;
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
           const allUsers = await user.find({}).toArray();
           res.json({ status: 200, data: allUsers });
         } else {
-          const oneUser = await user.find({ _id : new ObjectId(slug[0]) }).toArray();
+          const oneUser = await user.find({ userName : slug[0] }).toArray();
           console.log(oneUser[0])
           if (oneUser[0]) {
             res.json({ status: 200, data: oneUser[0] });

@@ -13,7 +13,9 @@ export default function NavBar(){
     const loggedinNavBar = () => {
         return(
             <div>logged in
-            <button onClick={()=>setUsername("")}>logout</button>
+            <button onClick={()=>{
+                setUsername("")}
+            }>logout</button>
             </div>
         )
     }

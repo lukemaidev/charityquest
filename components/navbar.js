@@ -19,10 +19,9 @@ export default function NavBar() {
           process.env.NEXT_PUBLIC_BACKEND_URI + "/user/" + navbarUsername
         );
         const json = await response.json();
-        console.log(json);
-        setUserinfo(json);
-        setUsername(json.data.userName);
-        console.log(userinfo);  
+        console.log("json: ");
+        await setUserinfo(json.data);
+        await setUsername(json.data.userName);
         setLoginError("");
       } catch (error) {
         setLoginError("Credential is not correct!");
@@ -38,6 +37,7 @@ export default function NavBar() {
     return (
       <div>
         <div>{userName}</div>
+        <div>{userinfo.userType}</div>
         <button
           onClick={() => {
             setUsername("");
@@ -52,6 +52,7 @@ export default function NavBar() {
     console.log("Logged out");
     return (
       <div>
+        
         logged out
         <input
           type="text"

@@ -1,12 +1,12 @@
 "use client"
 
-import useFetch from "@/hooks/useFetch"
+import ResolutionCard from "./resolutionPanel/resolutionCard";
 
-export default function ResolutionPanel(){
-    const { data, loading, error } = useFetch(process.env.NEXT_PUBLIC_BACKEND_URI+"/resolution")
+export default function ResolutionPanel({Resolutions_id}){
     return(<div>
-        {loading && <div>Loading...</div>}
-        {error && <div>Error: {error.message}</div>}
-        {data && <div>There's data Trust me bro</div>}
+        {
+        Resolutions_id.map((resolution, i) => {
+            return <ResolutionCard Resolutions_id={resolution} key={i}/>;
+        })}
     </div>)
 }

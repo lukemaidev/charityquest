@@ -58,6 +58,7 @@ export default function NavBar() {
         <div className="grow  flex flex-row">
           <Link className="basis-20 p-1"href="/"> Home </Link>
           {userName !== "" ? <Link className="basis-25 p-1" href={"/user/"+userLink}> Your Resolution</Link>: <div/>}
+          <Link className="basis-30 p-1"href="/resolution"> New Resolution! </Link>
         </div>
       </div>
     );

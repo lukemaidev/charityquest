@@ -1,23 +1,31 @@
 "use client"
 
 import { useEffect, useState } from "react"
- 
-const useFetch = (url) => {
-  const [data, setdata] = useState(null);
-  const [loading, setloading] = useState(true);
-  const [error, seterror] = useState("");
- 
-  useEffect(() => {
-    fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-        seterror(data.error)
-        setdata(data.data)
-        setloading(false)
-    })
-  }, [url]);
- 
-  return { data, loading, error };
-};
- 
-export default useFetch;
+import axios from "axios"
+
+
+export default function useFetch(url){
+
+    const [data,setData] = useState(null)
+    const [error,setError] = useState(null)
+    const [loading,setLoading] = useState(false)
+
+    useEffect(() => {
+        (
+            async function(){
+                try{
+                    setLoading(true)
+                    const response = await axios.get(url)
+                    setData(response.data)
+                }catch(err){
+                    setError(err)
+                }finally{
+                    setLoading(false)
+                }
+            }
+        )()
+    }, [url])
+
+    return { data, error, loading }
+
+}

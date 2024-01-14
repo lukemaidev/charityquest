@@ -1,20 +1,17 @@
-"use client"
+"use client";
 
-import Image from 'next/image'
-import AllResolutionPanel from '@/components/allResolutionPanel'
-import { useAppContext } from '@/context/AppContext'
+import Image from "next/image";
+import AllResolutionPanel from "@/components/allResolutionPanel";
+import { useAppContext } from "@/context/AppContext";
 
 export default function Home() {
-  const { userName, theme, setUsername, toggleTheme, userinfo, setUserinfo } = useAppContext();
+  const { userName, theme, setUsername, toggleTheme, userinfo, setUserinfo } =
+    useAppContext();
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
-      <div className='h-dvh min-w-full items-center justify-between flex flex-col flex-row' >
-        <AllResolutionPanel/>
-        <Image src="/meoww.jpg"     
-        width={50}
-        height={50}
-      />
+    <main className="w-full h-screen grid place-content-center bg-slate-700">
+      <div className="w-auto h-full bg-slate-800">
+          <AllResolutionPanel />
       </div>
     </main>
-  )
+  );
 }

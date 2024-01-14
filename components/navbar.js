@@ -5,6 +5,7 @@ import useFetch from "@/hooks/useFetch";
 import { set } from "mongoose";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function NavBar() {
   const { userName, theme, setUsername, toggleTheme, userinfo, setUserinfo } =
@@ -64,18 +65,16 @@ export default function NavBar() {
   const loggedoutNavBar = () => {
     console.log("Logged out");
     return (
-      <div>
-        {userName} {theme}
-        logged out
-        <input
+      <div className="flex flex-row bg-slate-900 w-screen h-12 flex-row-reverse p-1 space-x-1">
+        <input  className="basis-40 p-1 bg-white text-black rounded"
           type="text"
           value={navbarUsername}
           onChange={(e) => setNavbarUsername(e.target.value)}
         />
-        <button onClick={() => logIn()}>login</button>
-        {loginError}
-        <button onClick={toggleTheme}>toggle theme</button>
+        <button  className="basis-40 p-1 bg-sky-500 hover:bg-sky-700 rounded" onClick={() => logIn()}>login</button>
+        <button  className="basis-40 p-1 bg-sky-500 hover:bg-sky-700 rounded" onClick={toggleTheme}>toggle theme</button>
       </div>
+      
     );
   };
 

@@ -4,7 +4,7 @@ import useFetch from "@/hooks/useFetch";
 
 export default function AllResolutionPanel(){
     const { data, loading, error } = useFetch(process.env.NEXT_PUBLIC_BACKEND_URI+"/resolution/")
-    return(<div>
+    return(<div className="">
         
         {loading && <div>Loading...</div>}
         {error && <div>Error: {error.message}</div>}

@@ -3,7 +3,8 @@
 import { useAppContext } from "@/context/AppContext";
 import useFetch from "@/hooks/useFetch";
 import { set } from "mongoose";
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function NavBar() {
   const { userName, theme, setUsername, toggleTheme, userinfo, setUserinfo } =
@@ -11,7 +12,9 @@ export default function NavBar() {
 
   const [navbarUsername, setNavbarUsername] = useState("kekew");
   const [loginError, setLoginError] = useState("");
+  const [userLink, setUserLink] = useState("");
 
+  console.log(userName)
   const logIn = () => {
     const fetchData = async () => {
       try {
@@ -33,18 +36,28 @@ export default function NavBar() {
     fetchData();
   };
 
+  useEffect(() => {
+    setUserLink(userName)
+  },[userName]);
+
   const loggedinNavBar = () => {
     return (
-      <div>
-        <div>{userName}</div>
-        <div>{userinfo.userType}</div>
-        <button
+      <div className="flex flex-row bg-slate-900 w-screen h-12 flex-row-reverse p-1 space-x-1">
+        
+        <div className="basis-60 p-1">Current theme: {theme}</div>
+        <div className="basis-40 p-1">Hi {userName}!</div>
+        <button className="basis-40 p-1 bg-sky-500 hover:bg-sky-700 rounded"
           onClick={() => {
             setUsername("");
           }}
         >
           logout
         </button>
+        <button className="basis-40 p-1 bg-sky-500 hover:bg-sky-700 rounded" onClick={toggleTheme}>toggle theme</button>
+        <div className="grow  flex flex-row">
+          <Link className="basis-20 p-1"href="/"> Home </Link>
+          {userName !== "" ? <Link className="basis-25 p-1" href={"/user/"+userLink}> Your Resolution</Link>: <div/>}
+        </div>
       </div>
     );
   };
@@ -52,7 +65,7 @@ export default function NavBar() {
     console.log("Logged out");
     return (
       <div>
-        
+        {userName} {theme}
         logged out
         <input
           type="text"
@@ -61,15 +74,16 @@ export default function NavBar() {
         />
         <button onClick={() => logIn()}>login</button>
         {loginError}
+        <button onClick={toggleTheme}>toggle theme</button>
       </div>
     );
   };
 
   return (
     <div>
-      {userName} {theme}
+      
       {userName == "" ? loggedoutNavBar() : loggedinNavBar()}
-      <button onClick={toggleTheme}>toggle theme</button>
+      
     </div>
   );
 }

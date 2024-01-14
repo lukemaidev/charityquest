@@ -4,8 +4,9 @@ import React, { createContext, useState, useContext } from 'react';
  const AppContext = createContext();
 // Create a provider component
  export const AppProvider = ({ children }) => {
- const [userName, setUsername] = useState("Yasss");
+ const [userName, setUsername] = useState("");
  const [theme, setTheme] = useState("light");
+ const [userinfo, setUserinfo] = useState({});
  const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
@@ -16,7 +17,9 @@ import React, { createContext, useState, useContext } from 'react';
  userName,
  theme,
  setUsername,
- toggleTheme
+ toggleTheme, 
+ userinfo,
+ setUserinfo
  };
 return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
  };
